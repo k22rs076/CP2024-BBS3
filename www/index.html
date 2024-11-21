@@ -243,7 +243,7 @@ function updatePost(postId) {
     if (!validateContent(contentVal)) return;
 
     // content の内容を変更し、updatedAt フィールドを付加して、更新後の投稿内容を生成
-    const updates = {
+    postsRef.child(postId).update() = {
         content: contentVal,
         updatedAt: firebase.database.ServerValue.TIMESTAMP
     };
@@ -268,7 +268,7 @@ function deletePost(postId) {
     const postElement = $(`#post-${postId}`);
     postElement.addClass('deleting');
 
-    postsRef.child(postId).update({content: '削除されました'})
+    postsRef.child(postId).remove({content: '削除されました'})
         .then(() => {
             showMessage('投稿を削除しました');
         })
